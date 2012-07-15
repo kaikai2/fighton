@@ -1,9 +1,11 @@
 {
-    "name": "application-name"
+    "name": "fighton"
   , "version": "0.0.1"
   , "private": true
   , "dependencies": {
       "express": "2.5.10"
-    , "jade": ">= 0.0.1"
+    , "ejs": ">= 0.7.1"
+    , "async": ">= 0.1.22"
+    , "mongoose": ">= 2.7.1"
   }
 }
