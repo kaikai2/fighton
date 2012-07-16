@@ -42,7 +42,7 @@ exports.init = function(port){
  app.post('/logout', login.logout);
  app.post('/register', login.register);
  app.get('/login', login.index);
-
+ app.get('/search', search.index);
  app.get('/', routes.index);
 
  app.listen(port, function(){
