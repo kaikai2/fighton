@@ -12,7 +12,7 @@ exports.init = function(port){
  var app = express.createServer();
 
  process.on("unhandledException", function(e){
-	 console.log(e);
+	 console.log(e, e.stack);
  });
 
  // Configuration
