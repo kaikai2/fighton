@@ -5,6 +5,7 @@
 
 var express = require('express')
   , routes = require('./routes')
+    , search = require('./controllers/search')
     , login = require('./controllers/login');
 
 exports.init = function(port){
@@ -44,7 +45,14 @@ exports.init = function(port){
  app.get('/login', login.index);
  app.get('/search', search.index);
  app.get('/', routes.index);
-
+ app.get('/:module', function(req, res, next){
+	 try{
+	     console.log(req.params.module);
+	     res.render(req.params.module, { title: 'FightOn - express page', user: req.session.user});
+	 }catch(e){
+	     console.log(e);
+	 }
+});
  app.listen(port, function(){
    console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
  });

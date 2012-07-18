@@ -1,9 +1,11 @@
 <script>
 $(function(){
+	/*
 	$("#search-fight, #search-compete").click(function(){
 		$("#form-search #commit").text($(this).text());
 	});
 	$("#form-search #commit").text($("#search-fight").text());
+        */
 });
 </script>
 <div class="row">
@@ -12,14 +14,17 @@ $(function(){
     <span>
       <form class="form" action="" method="get">
 	<div class="btn-group">
-      	  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">城市
+      	  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+	    <i id="curentCityName"><%= currentCityName %></i>
+	    切换城市
       	    <span class="caret"></span>
 	  </a>
-	  <ul class="dropdown-menu">
-      	    <li><a href="?c=1#">长沙</a></li>
-	    <li><a href="?c=2#">上海</a></li>
-	    <li><a href="?c=3#">北京</a></li>
-	  </ul>
+	  <ul class="dropdown-menu"><%
+	  for (var i in cityNames){
+	       var name = cityNames[i];%>
+	    <li><a href="?c=<%= i %>"><%= name %></a></li>
+	    <% }
+ 	  %></ul>
 	</div>
       </form>
     </span>
@@ -33,18 +38,30 @@ $(function(){
       <li><a href="shop">商城</a></li>
       <li><a href="more">更多</a></li>
     </ul>
+    <span class="btn-group inline">
+      <button id="searchby" class="btn dropdown-toggle" data-toggle="dropdown">
+	按条件
+	<span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+	<li><a href="#" id="search-by1">条件1</a></li>
+	<li><a href="#" id="search-by2">条件2</a></li>
+      </ul>
+    </span>
     <form id="form-search" class="form-search" action="search" method="get">
+      
       <input id="q" name="q" type="text" class="input-xxlarge search-query">
-	<span class="pull-right"><div class="btn-group inline">
-	  <button class="btn" id="commit"></button>
+	<span class="btn-group pull-right">
+	  <button class="btn" id="commit">搜索</button>
       	  <button class="btn dropdown-toggle" data-toggle="dropdown">
       	    <span class="caret"></span>
 	  </button>
 	  <ul class="dropdown-menu">
-      	    <li><a href="#" id="search-compete">搜索比赛</a></li>
-	    <li><a href="#" id="search-fight">搜索约战</a></li>
+	    <li><a href="#" id="search-fight">约战</a></li>
+      	    <li><a href="#" id="search-compete">比赛</a></li>
 	  </ul>
-	</div></span>
+
+	</span>
     </form>
   </div>
 </div>
