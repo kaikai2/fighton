@@ -4,6 +4,7 @@
  */
 
 var express = require('express')
+  , fs = require('fs')
   , routes = require('./routes')
     , search = require('./controllers/search')
     , login = require('./controllers/login');
@@ -46,12 +47,19 @@ exports.init = function(port){
  app.get('/search', search.index);
  app.get('/', routes.index);
  app.get('/:module', function(req, res, next){
-	 try{
-	     console.log(req.params.module);
-	     res.render(req.params.module, { title: 'FightOn - express page', user: req.session.user});
-	 }catch(e){
-	     console.log(e);
-	 }
+	var path = __dirname + '/views/' + req.params.module + '.*';
+	fs.exists(path, function(exists){
+		if (exists){
+			 try{
+				 console.log(req.params.module);
+				 res.render(req.params.module, { title: 'FightOn - express page', user: req.session.user});
+			 }catch(e){
+				 console.log(e);
+			 }
+		}else{
+			next();
+		}
+	});
 });
  app.listen(port, function(){
    console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
